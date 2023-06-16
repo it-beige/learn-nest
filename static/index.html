@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>learn-nest</title>
+  </head>
+  <body>
+    hello world nest!
+  </body>
+  <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/qs@6.10.2/dist/qs.js"></script>
+  <script>
+    async function urlParam() {
+      const res = await axios.get('/api/person/1');
+      console.log(res);
+    }
+    urlParam();
+
+    async function urlParam2() {
+      const res = await axios.get('/api/person/find', {
+        params: { name: '北歌', age: '22' },
+      });
+      console.log(res);
+    }
+    urlParam2();
+
+    async function formUrlEncoded() {
+      const res = await axios.post(
+        '/api/person',
+        Qs.stringify({
+          name: '北歌',
+          age: 22,
+        }),
+        {
+          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        },
+      );
+      console.log(res);
+    }
+
+    formUrlEncoded();
+
+    async function json() {
+      const res = await axios.post('/api/person', {
+        name: '北歌',
+        age: 22,
+      });
+      console.log(res);
+    }
+    json();
+  </script>
+
+  <input
+    style="display: block; margin-top: 100px"
+    id="fileInput"
+    type="file"
+    multiple
+  />
+  <script>
+    const fileInput = document.querySelector('#fileInput');
+
+    async function formData() {
+      const data = new FormData();
+      data.set('name', '北歌');
+      data.set('age', 22);
+      [...fileInput.files].forEach((_, idx) => {
+        let name = 'file';
+        data.set(`file${idx + 1}`, fileInput.files[idx]);
+      });
+      const res = await axios.post('/api/person/file', data, {
+        headers: { 'content-type': 'multipart/form-data' },
+      });
+      console.log(res);
+    }
+
+    fileInput.onchange = formData;
+  </script>
+</html>
