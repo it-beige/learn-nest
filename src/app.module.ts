@@ -2,10 +2,45 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PersonModule } from './person/person.module';
+import { AaaModule } from './aaa/aaa.module';
+import { BbbModule } from './bbb/bbb.module';
 
 @Module({
-  imports: [PersonModule],
+  imports: [PersonModule, AaaModule, BbbModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    // {
+    //   provide: AppService,
+    //   useClass: AppService,
+    // },
+    {
+      provide: 'app_service',
+      useClass: AppService,
+    },
+    {
+      provide: 'customUseValue',
+      useValue: { name: 'beige' },
+    },
+    {
+      provide: 'customUseFactaory',
+      inject: ['app_service', 'customUseValue'],
+      useFactory: async (
+        appService: AppService,
+        customUseValue: { name: string },
+      ) => {
+        // 支持异步
+        await Promise.resolve();
+        return {
+          age: 22,
+          name: customUseValue.name,
+          desc: appService.getHello(),
+        };
+      },
+    },
+    {
+      provide: 'customUseExisting',
+      useExisting: 'customUseValue',
+    },
+  ],
 })
 export class AppModule {}
