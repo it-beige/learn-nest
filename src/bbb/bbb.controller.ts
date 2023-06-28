@@ -24,7 +24,7 @@ export class BbbController {
     return this.bbbService.create(createBbbDto);
   }
 
-  @Get()
+  @Get('findAll')
   findAll() {
     return `This action returns all bbb` + this.aaaService.findAll();
   }
