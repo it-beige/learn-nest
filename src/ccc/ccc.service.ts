@@ -1,8 +1,11 @@
+import { DddService } from './../ddd/ddd.service';
 import {
+  Inject,
   Injectable,
   OnApplicationBootstrap,
   OnModuleDestroy,
   OnModuleInit,
+  Optional,
 } from '@nestjs/common';
 import { CreateCccDto } from './dto/create-ccc.dto';
 import { UpdateCccDto } from './dto/update-ccc.dto';
@@ -11,6 +14,8 @@ import { UpdateCccDto } from './dto/update-ccc.dto';
 export class CccService
   implements OnApplicationBootstrap, OnModuleInit, OnModuleDestroy
 {
+  // @Optional, 如果provider没有提供, @Inject也没有报错
+  @Optional() @Inject('DddService') dddService: DddService;
   create(createCccDto: CreateCccDto) {
     return 'This action adds a new ccc';
   }
