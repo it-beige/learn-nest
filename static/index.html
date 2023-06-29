@@ -7,6 +7,7 @@
   </head>
   <body>
     hello world nest!
+    <div id="session"></div>
   </body>
   <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
   <script src="https://unpkg.com/qs@6.10.2/dist/qs.js"></script>
@@ -46,7 +47,6 @@
         name: '北歌',
         age: 22,
       });
-      console.log(res);
     }
     json();
   </script>
@@ -75,5 +75,19 @@
     }
 
     fileInput.onchange = formData;
+  </script>
+
+  <script>
+    async function getSession() {
+      const set = async () => {
+        const res = await axios.get('/aaa/session');
+        const dom = document.getElementById('session');
+        dom.textContent = res.data;
+        return dom;
+      };
+      const dom = await set();
+      dom.addEventListener('click', set);
+    }
+    getSession();
   </script>
 </html>

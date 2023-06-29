@@ -11,6 +11,7 @@ export class AaaFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
     const response: Response = host.switchToHttp().getResponse();
     const statusCode = exception.getStatus();
+    console.log('ExceptionFilter');
     response.status(statusCode).json({ meg: exception.message });
   }
 }
