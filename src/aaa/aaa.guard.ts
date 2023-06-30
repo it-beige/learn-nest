@@ -15,7 +15,10 @@ export class AaaGuard implements CanActivate {
       'roles',
       context.getHandler(),
     );
-    console.log(classMetadata, controllerMetadata);
+    console.log(
+      `classMetadata: ${classMetadata}`,
+      `controllerMetadata: ${controllerMetadata}`,
+    );
     return true;
   }
 }

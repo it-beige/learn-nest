@@ -34,6 +34,7 @@ import { AaaGuard } from './aaa.guard';
 import { AaaInterceptor } from './aaa.interceptor';
 import { AaaPipe } from './aaa.pipe';
 import { Request, Response } from 'express';
+import { Aaa, applyGetWithGuards, customParamDecorator } from './aaa.decorator';
 
 // @Controller('aaa')
 @Controller({ host: ':host.0.0.1', path: 'aaa' })
@@ -106,6 +107,17 @@ export class AaaController {
     return session.count;
   }
 
+  @applyGetWithGuards('applyDecorators', ['admin'])
+  applyDecorators() {
+    return 'applyDecorators';
+  }
+
+  @applyGetWithGuards('createParamDecorator', ['admin'])
+  createParamDecorator(@customParamDecorator('query') query): string {
+    return JSON.stringify(query);
+  }
+
+  @Aaa('admin')
   @UseGuards(AaaGuard)
   @UseFilters(AaaFilter)
   @UseInterceptors(AaaInterceptor)
