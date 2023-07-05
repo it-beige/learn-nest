@@ -29,12 +29,13 @@ import {
 import { AaaService } from './aaa.service';
 import { CreateAaaDto } from './dto/create-aaa.dto';
 import { UpdateAaaDto } from './dto/update-aaa.dto';
-import { AaaFilter } from './aaa.filter';
+import { AaaFilter, CatchFilter } from './aaa.filter';
 import { AaaGuard } from './aaa.guard';
 import { AaaInterceptor } from './aaa.interceptor';
 import { AaaPipe } from './aaa.pipe';
 import { Request, Response } from 'express';
 import { Aaa, applyGetWithGuards, customParamDecorator } from './aaa.decorator';
+import { AaaException } from './aaa.exeception';
 
 // @Controller('aaa')
 @Controller({ host: ':host.0.0.1', path: 'aaa' })
@@ -115,6 +116,12 @@ export class AaaController {
   @applyGetWithGuards('createParamDecorator', ['admin'])
   createParamDecorator(@customParamDecorator('query') query): string {
     return JSON.stringify(query);
+  }
+
+  @applyGetWithGuards('exception', ['admin'])
+  @UseFilters(CatchFilter)
+  exception() {
+    throw new AaaException('aaa', 'bbb');
   }
 
   @Aaa('admin')

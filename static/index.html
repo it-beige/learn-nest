@@ -18,6 +18,13 @@
     }
     urlParam();
 
+    async function getRole() {
+      const res = await axios.get('/role/1', {
+        params: { user: { roles: ['admin'] } },
+      });
+    }
+    getRole();
+
     async function urlParam2() {
       const res = await axios.get('/api/person/find', {
         params: { name: '北歌', age: '22' },

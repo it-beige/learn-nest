@@ -7,9 +7,10 @@ import { BbbModule } from './bbb/bbb.module';
 import { AaaService } from './aaa/aaa.service';
 import { CccModule } from './ccc/ccc.module';
 import { DddModule } from './ddd/ddd.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
-  imports: [PersonModule, AaaModule, BbbModule, CccModule, DddModule],
+  imports: [PersonModule, AaaModule, BbbModule, CccModule, DddModule, RoleModule],
   controllers: [AppController],
   providers: [
     // {
