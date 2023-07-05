@@ -16,6 +16,8 @@ import { RoleModule } from './role/role.module';
 import { DynamicModuleModule } from './dynamic-module/dynamic-module.module';
 import { FasitfyAppController } from './fastify.app.controller';
 import { AaaMiddleware } from './aaa/aaa.middleware';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { TapTestInterceptor } from './aaa/aaa.interceptor';
 
 @Module({
   imports: [
@@ -29,6 +31,10 @@ import { AaaMiddleware } from './aaa/aaa.middleware';
   ],
   controllers: [AppController],
   providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TapTestInterceptor,
+    },
     {
       provide: AppService,
       useClass: AppService,

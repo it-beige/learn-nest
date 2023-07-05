@@ -31,11 +31,19 @@ import { CreateAaaDto } from './dto/create-aaa.dto';
 import { UpdateAaaDto } from './dto/update-aaa.dto';
 import { AaaFilter, CatchFilter } from './aaa.filter';
 import { AaaGuard } from './aaa.guard';
-import { AaaInterceptor } from './aaa.interceptor';
+import {
+  AaaInterceptor,
+  CatchErrorTestInterceptor,
+  MapTestInterceptor,
+  TapTestInterceptor,
+  TimeoutInterceptor,
+  TimerConSumingInterceptor,
+} from './aaa.interceptor';
 import { AaaPipe } from './aaa.pipe';
 import { Request, Response } from 'express';
 import { Aaa, applyGetWithGuards, customParamDecorator } from './aaa.decorator';
 import { AaaException } from './aaa.exeception';
+import { resolve } from 'path';
 
 // @Controller('aaa')
 @Controller({ host: ':host.0.0.1', path: 'aaa' })
@@ -45,9 +53,17 @@ export class AaaController {
 
   @Get('hello')
   @UseGuards(AaaGuard)
-  @UseInterceptors(AaaInterceptor)
+  @UseInterceptors(
+    TimerConSumingInterceptor,
+    MapTestInterceptor,
+    TapTestInterceptor,
+    CatchErrorTestInterceptor,
+    TimeoutInterceptor,
+  )
   @SetMetadata('roles', ['admin'])
-  getHello(): string {
+  async getHello() {
+    // throw new Error('xx');
+    await new Promise((resolve) => setTimeout(resolve, 1000 * 4));
     return 'hello Reflect.setMetadata';
   }
 

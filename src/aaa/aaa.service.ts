@@ -4,6 +4,10 @@ import { UpdateAaaDto } from './dto/update-aaa.dto';
 
 @Injectable()
 export class AaaService {
+  updateLog() {
+    console.log('更新缓存');
+  }
+
   create(createAaaDto: CreateAaaDto) {
     return 'This action adds a new aaa';
   }
