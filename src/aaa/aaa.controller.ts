@@ -43,6 +43,14 @@ import { AaaException } from './aaa.exeception';
 export class AaaController {
   constructor(private readonly aaaService: AaaService) {}
 
+  @Get('hello')
+  @UseGuards(AaaGuard)
+  @UseInterceptors(AaaInterceptor)
+  @SetMetadata('roles', ['admin'])
+  getHello(): string {
+    return 'hello Reflect.setMetadata';
+  }
+
   @Post()
   create(@Body() createAaaDto: CreateAaaDto) {
     return this.aaaService.create(createAaaDto);

@@ -19,6 +19,27 @@ export class AaaGuard implements CanActivate {
       `classMetadata: ${classMetadata}`,
       `controllerMetadata: ${controllerMetadata}`,
     );
+    console.log(
+      'getAll',
+      this.reflector.getAll('roles', [
+        context.getHandler(),
+        context.getClass(),
+      ]),
+    );
+    console.log(
+      'getAllAndMerge',
+      this.reflector.getAllAndMerge('roles', [
+        context.getHandler(),
+        context.getClass(),
+      ]),
+    );
+    console.log(
+      'getAllAndOverride',
+      this.reflector.getAllAndOverride('roles', [
+        context.getHandler(),
+        context.getClass(),
+      ]),
+    );
     return true;
   }
 }
