@@ -35,6 +35,11 @@ export class CccController
     return this.cccService.create(createCccDto);
   }
 
+  @Get('circular-dep')
+  circularDep() {
+    return this.cccService.ccc();
+  }
+
   @Get()
   findAll() {
     return this.cccService.findAll();

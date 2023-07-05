@@ -6,6 +6,7 @@ import {
   OnModuleDestroy,
   OnModuleInit,
   Optional,
+  forwardRef,
 } from '@nestjs/common';
 import { CreateCccDto } from './dto/create-ccc.dto';
 import { UpdateCccDto } from './dto/update-ccc.dto';
@@ -14,10 +15,18 @@ import { UpdateCccDto } from './dto/update-ccc.dto';
 export class CccService
   implements OnApplicationBootstrap, OnModuleInit, OnModuleDestroy
 {
+  constructor(
+    @Inject(forwardRef(() => DddService))
+    private readonly dddService: DddService,
+  ) {}
   // @Optional, 如果provider没有提供, @Inject也没有报错
-  @Optional() @Inject('DddService') dddService: DddService;
+  // @Optional() @Inject('DddService') dddService: DddService;
   create(createCccDto: CreateCccDto) {
     return 'This action adds a new ccc';
+  }
+
+  ccc() {
+    return 'ccc' + this.dddService.ddd();
   }
 
   onModuleInit() {

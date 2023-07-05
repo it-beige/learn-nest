@@ -1,11 +1,21 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { CreateDddDto } from './dto/create-ddd.dto';
 import { UpdateDddDto } from './dto/update-ddd.dto';
+import { CccService } from 'src/ccc/ccc.service';
 
 @Injectable()
 export class DddService {
+  constructor(
+    @Inject(forwardRef(() => CccService))
+    private readonly cccService: CccService,
+  ) {}
+
   create(createDddDto: CreateDddDto) {
     return 'This action adds a new ddd';
+  }
+
+  ddd() {
+    return 'ddd';
   }
 
   findAll() {
