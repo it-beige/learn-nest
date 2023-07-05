@@ -1,3 +1,4 @@
+import { DynamicModuleModule } from './../dynamic-module/dynamic-module.module';
 import {
   BeforeApplicationShutdown,
   Module,
@@ -10,9 +11,13 @@ import {
 import { CccService } from './ccc.service';
 import { CccController } from './ccc.controller';
 import { DddModule } from 'src/ddd/ddd.module';
-
+DynamicModuleModule;
 @Module({
-  imports: [forwardRef(() => DddModule)],
+  imports: [
+    forwardRef(() => DddModule),
+    // DynamicModuleModule.register({ name: 'beige' }),
+    DynamicModuleModule.register({ aaa: 111, bbb: 'bbb' }),
+  ],
   controllers: [CccController],
   providers: [CccService],
   exports: [CccService],

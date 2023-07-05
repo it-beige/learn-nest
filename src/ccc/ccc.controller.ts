@@ -1,3 +1,4 @@
+import { DynamicModuleService } from './../dynamic-module/dynamic-module.service';
 import {
   Controller,
   Get,
@@ -9,6 +10,7 @@ import {
   OnModuleInit,
   OnApplicationBootstrap,
   OnModuleDestroy,
+  Inject,
 } from '@nestjs/common';
 import { CccService } from './ccc.service';
 import { CreateCccDto } from './dto/create-ccc.dto';
