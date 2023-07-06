@@ -16,9 +16,11 @@ import { RoleModule } from './role/role.module';
 import { DynamicModuleModule } from './dynamic-module/dynamic-module.module';
 import { FasitfyAppController } from './fastify.app.controller';
 import { AaaMiddleware } from './aaa/aaa.middleware';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { TapTestInterceptor } from './aaa/aaa.interceptor';
 import { PipeModule } from './pipe/pipe.module';
+import { DtoModule } from './dto/dto.module';
+import { DtoValidationPipe } from './dto/dto.pipe';
 
 @Module({
   imports: [
@@ -30,12 +32,17 @@ import { PipeModule } from './pipe/pipe.module';
     RoleModule,
     DynamicModuleModule,
     PipeModule,
+    DtoModule,
   ],
   controllers: [AppController],
   providers: [
     // {
     //   provide: APP_INTERCEPTOR,
     //   useClass: TapTestInterceptor,
+    // },
+    // {
+    //   provide: APP_PIPE,
+    //   useClass: DtoValidationPipe,
     // },
     {
       provide: AppService,
