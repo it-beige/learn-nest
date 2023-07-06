@@ -11,6 +11,8 @@ import {
 import { CccService } from './ccc.service';
 import { CccController } from './ccc.controller';
 import { DddModule } from 'src/ddd/ddd.module';
+import { AppService } from 'src/app.service';
+import { DddService } from 'src/ddd/ddd.service';
 
 DynamicModuleModule;
 @Module({

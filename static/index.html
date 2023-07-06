@@ -63,7 +63,7 @@
     json();
   </script>
 
-  <input
+  <!-- <input
     style="display: block; margin-top: 100px"
     id="fileInput"
     type="file"
@@ -83,6 +83,30 @@
       const res = await axios.post('/api/person/file', data, {
         headers: { 'content-type': 'multipart/form-data' },
       });
+      console.log(res);
+    }
+
+    fileInput.onchange = formData;
+  </script> -->
+  <input id="fileInput" type="file" multiple />
+  <script>
+    const fileInput = document.querySelector('#fileInput');
+
+    async function formData() {
+      const data = new FormData();
+      data.set('name', '光');
+      data.set('age', 20);
+      let api = '';
+      const files = [...fileInput.files];
+      let l = files.length;
+      while (l) {
+        if (!data.has('aaa')) {
+          data.set('aaa', files.at(0));
+        }
+        --l;
+        data.append('bbb', files[files.length - l]);
+      }
+      const res = await axios.post('http://localhost:3000/file/upload', data);
       console.log(res);
     }
 

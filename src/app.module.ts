@@ -21,6 +21,7 @@ import { TapTestInterceptor } from './aaa/aaa.interceptor';
 import { PipeModule } from './pipe/pipe.module';
 import { DtoModule } from './dto/dto.module';
 import { DtoValidationPipe } from './dto/dto.pipe';
+import { FileModule } from './file/file.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { DtoValidationPipe } from './dto/dto.pipe';
     DynamicModuleModule,
     PipeModule,
     DtoModule,
+    FileModule,
   ],
   controllers: [AppController],
   providers: [
