@@ -18,6 +18,7 @@ import { FasitfyAppController } from './fastify.app.controller';
 import { AaaMiddleware } from './aaa/aaa.middleware';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TapTestInterceptor } from './aaa/aaa.interceptor';
+import { PipeModule } from './pipe/pipe.module';
 
 @Module({
   imports: [
@@ -28,13 +29,14 @@ import { TapTestInterceptor } from './aaa/aaa.interceptor';
     DddModule,
     RoleModule,
     DynamicModuleModule,
+    PipeModule,
   ],
   controllers: [AppController],
   providers: [
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: TapTestInterceptor,
-    },
+    // {
+    //   provide: APP_INTERCEPTOR,
+    //   useClass: TapTestInterceptor,
+    // },
     {
       provide: AppService,
       useClass: AppService,

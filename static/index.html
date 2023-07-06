@@ -25,6 +25,11 @@
     }
     getRole();
 
+    async function getUUID() {
+      const res = await axios.get('/pipe/4e00a5d0-fad4-45a5-9d35-f07a499f8c35');
+    }
+    getUUID();
+
     async function urlParam2() {
       const res = await axios.get('/api/person/find', {
         params: { name: '北歌', age: '22' },
